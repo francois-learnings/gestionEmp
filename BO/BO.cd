@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GestionEmployes.BO.Client" Collapsed="true">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GestionEmployes.BO.Employe">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAoAAAAAAAABAAAACAAIAAgAAACQAAAAAAAAAAACgA=</HashCode>
+      <FileName>Employe.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Service" />
+      <Property Name="Chef" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GestionEmployes.BO.Personne" Collapsed="true">
+    <Position X="3" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAEAEAAIAAAACAAIBCAACACgEBAAAA=</HashCode>
+      <FileName>Personne.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GestionEmployes.BO.Service" Collapsed="true">
+    <Position X="6" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAgAAAAIAAAAACAgACAAAAAgAA=</HashCode>
+      <FileName>Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
