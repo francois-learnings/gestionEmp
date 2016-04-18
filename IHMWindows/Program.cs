@@ -1,22 +1,25 @@
-﻿using System;
+﻿using GestionEmployes.BLL;
+using GestionEmployes.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace IHMWindows
+namespace GestionEmployes.IHMConsole
 {
-    static class Program
+    class Program
     {
-        /// <summary>
-        /// Point d'entrée principal de l'application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            /*Animal animalAAfficher = BLLAnimal.getPremierAnimal();
+            Console.WriteLine("Voici l'animal retourné:");
+            Console.WriteLine("Race: {0}, Espèce: {1}",
+                                animalAAfficher.getRace(),
+                                animalAAfficher.Espece);
+            Console.ReadKey();*/
+            EcranPrincipal ep = new EcranPrincipal();
+            ep.Afficher();
         }
     }
 }

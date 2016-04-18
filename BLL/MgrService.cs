@@ -13,6 +13,11 @@ namespace GestionEmployes.BLL
         //contructeur privé empèche de creer une intance de la classe depuis l'exterieur
         private MgrService()
         {
+            this.listeServices = new List<Service>();
+            // simuler l'acces a une base de donnees pour charger les services existant
+            this.AjouterService("Infor", "informatique");
+            this.AjouterService("reshu", "RH");
+            this.AjouterService("compt", "Comptabilité");
         }
 
         //Mise en place d'une methode statique pour pouvoir entrer dans la classe et utiliser le contructeur privé
@@ -31,7 +36,7 @@ namespace GestionEmployes.BLL
         private static MgrService instance;
         #endregion
 
-        private List<Service> listeServices = new List<Service>();
+        private List<Service> listeServices;
 
         public List<Service> Serviceslist
         {
