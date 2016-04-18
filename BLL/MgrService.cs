@@ -45,6 +45,7 @@ namespace GestionEmployes.BLL
         public void AjouterService(string code, string libelle)
         {
             Service serviceAAjouter = new Service(code, libelle);
+            /*
             foreach (Service s in this.Serviceslist)
             {
                 //Autre possibilité;
@@ -55,8 +56,23 @@ namespace GestionEmployes.BLL
                 }
 
             }
-
             Service newService = new Service(code, libelle);
+            */
+            // Idem mais avec expression lamda
+            // Si le service existe deja -> lance erreur, sinon ajoute la valeur
+            Service serviceExistant = this.Serviceslist.Find((Service s) => s.Code == serviceAAjouter.Code || s.Libelle == serviceAAjouter.Libelle);
+            if (serviceExistant != null)
+            {
+                    throw new ApplicationException(string.Format("Un Service identique existe deja: {0}", serviceExistant));
+            }
+
+            //ou
+            if(this.Serviceslist.Exists((Service s) => s.Code == serviceAAjouter.Code || s.Libelle == serviceAAjouter.Libelle))
+            {
+                    throw new ApplicationException(string.Format("Un Service identique existe deja"));
+            }
+
+
             this.listeServices.Add(serviceAAjouter);
         }
         #endregion
@@ -83,6 +99,8 @@ namespace GestionEmployes.BLL
                 throw new ApplicationException("Service inexistant - Impossible de le supprimer" );
             }
            //this.listeServices.Remove(s);
+
+
         }
 
         public void SupprimerService(string code)
@@ -132,11 +150,12 @@ namespace GestionEmployes.BLL
         #region Modification
         public void ModifierService(Service service, string libelle, string code=null)
         {
+
                 if (code != null)
                 {
                     code = code.ToUpper();
                 }
-
+            
             foreach (Service s in Serviceslist)
             {
                 if (s!=service && s.Code==code)
@@ -154,6 +173,23 @@ namespace GestionEmployes.BLL
                 service.Code = code;
             }
             service.Libelle = libelle;
+        }
+        #endregion
+
+        #region Tri
+        public void Trier(CritereService critereService)
+        {
+            switch (critereService)
+            {
+                case CritereService.Code:
+                    this.listeServices.Sort((s1, s2) => s1.Code.CompareTo(s2.Code));
+                    break;
+                case CritereService.Libelle:
+                case CritereService.Defaut:
+                default:
+                    this.listeServices.Sort();
+                    break;
+            }
         }
         #endregion
 

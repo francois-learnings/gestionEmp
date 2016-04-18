@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Test.Generiques;
+using Test.Tri;
 
 namespace Test
 {
@@ -15,6 +16,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            #region Semaine1
             //testPersonne();
             /*
             try
@@ -58,16 +60,151 @@ namespace Test
             //testmodifierservice();
             /* Cours */
             //testtri(); // Non Implementé
-            testTriService();
+            //testTriService();
 
             //TODO permettre de trier la liste de service:
             //  -Par defaut sur le libelle
             //  -Par choix sur le code
             //  Bonus: délégué puis expression lambda(RI page 196)
-
+            #endregion
+            /*s2j1*/
+            //testTriParDelegue();
+            //testTriParExpressionLambda();
+            //testCreationEtUsageDelegue();
+            //TODO: Test TrierService(critereService) - voir version cours
+            //TrierService();
             Console.ReadKey();
         }
 
+
+
+        #region TP3
+        private static void TrierService()
+        {
+            //TODO - voir version cours
+            List<Service> listeServices = new List<Service>();
+            listeServices.Add(new Service("aaaaa", "zzzz"));
+            listeServices.Add(new Service("ccccc", "xxxx"));
+            listeServices.Add(new Service("bbbbb", "yyyy"));
+
+            MgrService.getInstance().Trier((CritereService)15);
+
+        }
+        #endregion
+        #region Utilisation délégué
+
+        //Je Declare une signature de fonction
+        public delegate void DisBonjour();
+
+        //JE crée des methodes correspondant a cette signature
+        public static void bonjourAmical()
+        {
+            Console.WriteLine("Salut Tout le monde");
+        }
+
+        public static void bonjourHierarchique()
+        {
+            Console.WriteLine("Bonjour Très cher chef. J'espere que vous allez vraiment bien");
+        }
+
+        public static void testCreationEtUsageDelegue()
+        {
+            Console.WriteLine("Le chef arrive vers moi...");
+            Parler(Program.bonjourHierarchique);
+            Console.WriteLine("Les collegues arrivent vers moi...");
+            Parler(Program.bonjourAmical);
+        }
+
+        private static void Parler(DisBonjour bonjour)
+        {
+            //bonjour.Invoke();
+            bonjour();
+        }
+        #endregion
+
+        #region Concept Délégué & expression lambda
+        private static void testTriParExpressionLambda()
+        {
+            List<Voiture> listeVoitures = new List<Voiture>();
+            listeVoitures.Add(new Voiture() { Marque = "RENAULT", Modele = "Clio", Kilometrage = 200000 });
+            listeVoitures.Add(new Voiture() { Marque = "AUDI", Modele = "A6", Kilometrage = 20000 });
+            listeVoitures.Add(new Voiture() { Marque = "CITROEN", Modele = "Picasso", Kilometrage = 150000 });
+            listeVoitures.Add(new Voiture() { Marque = "PORSCHE", Modele = "Carrera", Kilometrage = 5000 });
+            
+            // (param1, param2) => code retournant le type de rretour du delegué
+            listeVoitures.Sort((Voiture x, Voiture y) => x.Marque.CompareTo(y.Marque));
+            listeVoitures.ForEach(AfficheMoiCa);
+            separateur();
+            listeVoitures.ForEach((Voiture v) => Console.WriteLine(v));
+
+            separateur();
+            Console.WriteLine("Tri par modele");
+            listeVoitures.Sort((x, y) => x.Modele.CompareTo(y.Modele));
+            listeVoitures.ForEach((Voiture v) => Console.WriteLine(v));
+
+            //expression lambda sur plusieurs lignes
+            separateur();
+            Console.WriteLine("Tri par kilometrage");
+            listeVoitures.Sort
+            (
+                (Voiture x, Voiture y) =>
+                {
+                    int resultatComparaison;
+                    if (x==null && y==null)
+                    {
+                        resultatComparaison = 0;
+                    }
+                    else if (x==null)
+                    {
+                        resultatComparaison = -1;
+                    }
+                    else if (y==null)
+                    {
+                        resultatComparaison = 1;
+                    }
+                    else
+                    {
+                        resultatComparaison = x.Kilometrage - y.Kilometrage;
+                    }
+                    return resultatComparaison;
+                }
+            );
+
+            listeVoitures.ForEach(AfficheMoiCa);
+        }
+
+        private static void testTriParDelegue()
+        {
+            List<Voiture> listeVoitures = new List<Voiture>();
+            listeVoitures.Add(new Voiture() { Marque = "RENAULT", Modele = "Clio", Kilometrage = 200000 });
+            listeVoitures.Add(new Voiture() { Marque = "AUDI", Modele = "A6", Kilometrage = 20000 });
+            listeVoitures.Add(new Voiture() { Marque = "CITROEN", Modele = "Picasso", Kilometrage = 150000 });
+            listeVoitures.Add(new Voiture() { Marque = "PORSCHE", Modele = "Carrera", Kilometrage = 5000 });
+
+            listeVoitures.Sort(Program.ComparaisonParMarqueDESC);
+            foreach (Voiture v in listeVoitures)
+            {
+                Console.WriteLine(v);
+            }
+
+            separateur();
+            listeVoitures.ForEach(Program.AfficheMoiCa);
+
+
+        }
+
+        private static void AfficheMoiCa(Voiture obj)
+        {
+            Console.WriteLine(obj);
+        }
+
+        private static int ComparaisonParMarqueDESC(Voiture x, Voiture y)
+        {
+            return y.Marque.CompareTo(x.Marque);
+        }
+        #endregion
+
+        #region Interface
         private static void testTriService()
         {
             List<Service> listeServices = new List<Service>();
@@ -105,6 +242,7 @@ namespace Test
             }
 
         }
+        #endregion
 
         private static void testmodifierservice()
         {
