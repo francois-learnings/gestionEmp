@@ -22,7 +22,7 @@ namespace GestionEmployes.IHMConsole
                 listeService();
                 Console.WriteLine();
                 Console.WriteLine("--- Menu ---");
-                Console.WriteLine("Edition: (A)jouter - (M)odifier... ToDo");
+                Console.WriteLine("Edition: (A)jouter - (S)upprimer - (M)odifier... ToDo");
                 Console.WriteLine("Navigation: Menu (P)rincipal - Esc. Quitter");
                 tempsm1 = Console.ReadKey(true);
                 switch (tempsm1.Key)
@@ -30,6 +30,10 @@ namespace GestionEmployes.IHMConsole
                     case ConsoleKey.A:
                         //tempsm1 = ssm(); //Appeler sous-sous-menu
                         AjouterService();
+                        break;
+                    case ConsoleKey.D1:
+                    case ConsoleKey.NumPad1:
+                        tempsm1 = ssm();
                         break;
                 }
             } while (!(tempsm1.Key == ConsoleKey.Escape || tempsm1.Key == ConsoleKey.P));
@@ -53,6 +57,7 @@ namespace GestionEmployes.IHMConsole
 */
 
 
+         //TODO: Verfification de la validité à chaque etape de saisie (code puis libelle) - Délégué ?
         private void AjouterService()
         {
             Console.Clear();
@@ -77,11 +82,11 @@ namespace GestionEmployes.IHMConsole
             } while (!(codeAVerifier=="A" || libelleAVerifier=="A"));
         }
         
-        //TODO : tri de la liste
         private void listeService()
         {
             MgrService mgr = MgrService.getInstance();
             List<Service> liste = mgr.Serviceslist;
+            liste.Sort();
             for (int i = 0; i < liste.Count; i++)
             {
                 Console.WriteLine(i+1 + ": " + liste[i]);
