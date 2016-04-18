@@ -82,6 +82,13 @@ namespace Test
                 Console.WriteLine(s);
             }
 
+            separateur();
+            //Tri par code
+            listeServices.Sort(new GestionEmployes.BLL.ServiceTriParCode());
+            foreach (Service s in listeServices)
+            {
+                Console.WriteLine(s);
+            }
         }
 
         private static void testtri()
