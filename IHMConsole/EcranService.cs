@@ -249,20 +249,32 @@ namespace GestionEmployes.IHMConsole
             return tempssm;
         }
 
+
+        #region Debut Refacto verif avec delegué
         /*
-                public delegate void TrucAVerifier(string var);
+        public delegate void Verif(string var);
 
-                public static void code(string codeAVerifier)
-                {
-                    Console.WriteLine("Code A Verifier" + codeAVerifier);
-                }
+        public static void verifierCode(string codeAVerifier)
+        {
+            Console.WriteLine("Code A Verifier" + codeAVerifier);
+        }
 
-                private static void Verifier(TrucAVerifier truc)
-                {
-                    //bonjour.Invoke();
-                    truc();
-                }
+        public String saisie(String invite, Verif verif)
+        {
+            Console.WriteLine(invite);
+            String retour = Console.ReadLine();
+            try
+            {
+                verif(retour);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return retour;
+        }
         */
+        #endregion
 
         /// <summary>
         /// Metode permettant d'ajouter un service à la liste
@@ -275,6 +287,7 @@ namespace GestionEmployes.IHMConsole
             string libelleAVerifier;
             bool saisieOK;
             Console.WriteLine("--- Ajout d'un nouveau service ---" + System.Environment.NewLine);
+            
             do
             {
                 saisieOK = true;
@@ -291,6 +304,9 @@ namespace GestionEmployes.IHMConsole
                     saisieOK = false;
                 }
             } while (!(codeAVerifier == "A" || saisieOK));
+            
+            //this.saisie("veuillez saisir le code", MgrService.getInstance().VerifierCode);
+            
             do
             {
                 saisieOK = true;
@@ -306,6 +322,8 @@ namespace GestionEmployes.IHMConsole
                     saisieOK = false;
                 }
             } while (!(saisieOK));
+            
+            //this.saisie("veuillez saisir le code", MgrService.getInstance().VerifierLibelle);
 
             MgrService.getInstance().AjouterService(codeAVerifier, libelleAVerifier);
             Console.WriteLine("Le nouveau service a été ajouté");
