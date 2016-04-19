@@ -52,6 +52,9 @@ namespace GestionEmployes.IHMConsole
             return tempsm1;
         }
 
+        /// <summary>
+        /// Tri les services en fonction du code ou du libelle
+        /// </summary>
         private void TrierService()
         {
             Console.WriteLine();
@@ -77,6 +80,10 @@ namespace GestionEmployes.IHMConsole
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Permet de modifier le code et/ou le libelle d'un service
+        /// </summary>
+        /// <returns></returns>
         private ConsoleKeyInfo ModifierService()
         {
             ConsoleKeyInfo tempms = new ConsoleKeyInfo();
@@ -106,6 +113,11 @@ namespace GestionEmployes.IHMConsole
             return tempms;
         }
 
+        /// <summary>
+        /// methode utilisée par ModifierService() afin de valider la saisie du libelle
+        /// </summary>
+        /// <param name="s">Service</param>
+        /// <returns></returns>
         private string ModifierLibelle(Service s)
         {
             string nouveauLibelle;
@@ -137,6 +149,11 @@ namespace GestionEmployes.IHMConsole
             return nouveauLibelle;
         }
 
+        /// <summary>
+        /// Methode utilisée par ModifierService afin de valider la saisie du code
+        /// </summary>
+        /// <param name="s">Service</param>
+        /// <returns string> nouveauCode</returns>
         private string ModifierCode(Service s)
         {
             bool saisieOK;
@@ -168,6 +185,10 @@ namespace GestionEmployes.IHMConsole
             return nouveauCode;
         }
 
+        /// <summary>
+        /// Methode supprimant tous les services de la liste
+        /// </summary>
+        /// <returns></returns>
         private ConsoleKeyInfo ViderServices()
         {
             ConsoleKeyInfo tempvs = new ConsoleKeyInfo();
@@ -185,6 +206,10 @@ namespace GestionEmployes.IHMConsole
             return tempvs;
         }
 
+        /// <summary>
+        /// Methode permettant de supprimer un service
+        /// </summary>
+        /// <returns></returns>
         private ConsoleKeyInfo SupprimerService()
         {
             ConsoleKeyInfo tempssm = new ConsoleKeyInfo();
@@ -239,7 +264,9 @@ namespace GestionEmployes.IHMConsole
                 }
         */
 
-
+        /// <summary>
+        /// Metode permettant d'ajouter un service à la liste
+        /// </summary>
         //TODO: Factoriser methodes de verification via un délégué
         private void AjouterService()
         {
@@ -289,6 +316,10 @@ namespace GestionEmployes.IHMConsole
             }
         }
 
+        /// <summary>
+        /// Methode d'affichage des erreurs (format, couleur)
+        /// </summary>
+        /// <param name="message"></param>
         private void AfficherErreur(string message)
         {
             Console.ForegroundColor = this.couleurErreur;
@@ -296,6 +327,10 @@ namespace GestionEmployes.IHMConsole
             Console.ForegroundColor = this.couleurNormale;
         }
 
+        /// <summary>
+        /// Methode d'affichage des info (format, couleur)
+        /// </summary>
+        /// <param name="message"></param>
         private void AfficherInfo(string message)
         {
             Console.ForegroundColor = this.couleurInfo;
@@ -303,6 +338,9 @@ namespace GestionEmployes.IHMConsole
             Console.ForegroundColor = this.couleurNormale;
         }
 
+        /// <summary>
+        /// Methode qui liste et affiche les services
+        /// </summary>
         private void ListeService()
         {
             MgrService mgr = MgrService.getInstance();
