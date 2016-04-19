@@ -181,6 +181,39 @@ namespace GestionEmployes.BLL
         }
         #endregion
 
+        /// <summary>
+        /// S'assurer que le code respecte les regles de saisie
+        /// et que le code n'est pas deja pris
+        /// </summary>
+        /// <param name="codeAVerifier"></param>
+        /// <exception cref="ApplicationException"></exception>
+        public void VerfifierCode(string codeAVerifier)
+        {
+            Service.verifCode(codeAVerifier);
+            if (this.ObtenirService(codeAVerifier) != null)
+            {
+                throw new ApplicationException("Un service possède déjà ce code !");
+            }
+        }
+
+        /// <summary>
+        /// S'assurer que le libellé respecte les règles de saisie
+        /// et que le libellé n'est pas déjà pris
+        /// </summary>
+        /// <param name="nouveauLibelle"></param>
+        /// <exception cref="ApplicationException"></exception>
+        public void VerifierLibelle(string nouveauLibelle)
+        {
+            Service.verifLibelle(nouveauLibelle);
+            if (this.Serviceslist.Exists(
+                                            (Service s) =>
+                                             s.Libelle.Equals(nouveauLibelle, StringComparison.OrdinalIgnoreCase))
+                                        )
+            {
+                throw new ApplicationException("Un service possède déjà ce libellé");
+            }
+        }
+
         #region Tri
         public void Trier(CritereService critereService)
         {

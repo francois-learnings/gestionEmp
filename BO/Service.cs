@@ -59,7 +59,7 @@ namespace GestionEmployes.BO
             return sb.ToString();
         }
 
-        private void verifCode(string codeAVerifier)
+        public static void verifCode(string codeAVerifier)
         {
             if (String.IsNullOrWhiteSpace(codeAVerifier) || codeAVerifier.Length != 5)
             {
@@ -68,7 +68,7 @@ namespace GestionEmployes.BO
             }
         }
 
-        private void verifLibelle(string libelleAVerifier)
+        public static void verifLibelle(string libelleAVerifier)
         {
             if (String.IsNullOrWhiteSpace(libelleAVerifier))
             {
