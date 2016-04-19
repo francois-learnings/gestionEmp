@@ -25,7 +25,7 @@ namespace GestionEmployes.IHMConsole
                 ListeService();
                 Console.WriteLine();
                 Console.WriteLine("--- Menu ---");
-                Console.WriteLine("Edition: (A)jouter - (S)upprimer - (V)ider - (M)odifier");
+                Console.WriteLine("Edition: (A)jouter - (S)upprimer - (V)ider - (M)odifier - (T)rier");
                 Console.WriteLine("Navigation: Menu (P)rincipal - Esc. Quitter");
                 tempsm1 = Console.ReadKey(true);
                 switch (tempsm1.Key)
@@ -43,10 +43,38 @@ namespace GestionEmployes.IHMConsole
                     case ConsoleKey.M:
                         tempsm1 = ModifierService();
                         break;
+                    case ConsoleKey.T:
+                        TrierService();
+                        break;
                 }
             } while (!(tempsm1.Key == ConsoleKey.Escape || tempsm1.Key == ConsoleKey.P));
 
             return tempsm1;
+        }
+
+        private void TrierService()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Choisissez une option de tri (0-Par code, 1-Par libelle):");
+            ConsoleKeyInfo reponse = Console.ReadKey();
+
+            if (reponse.Key == ConsoleKey.NumPad0 || reponse.Key == ConsoleKey.D0 || reponse.Key == ConsoleKey.NumPad1 || reponse.Key == ConsoleKey.D1 )
+            {
+                if (reponse.Key == ConsoleKey.NumPad0 || reponse.Key == ConsoleKey.D0)
+                {
+                    MgrService.getInstance().Serviceslist.Sort((Service x, Service y) => x.Code.CompareTo(y.Code));
+                }
+                if (reponse.Key == ConsoleKey.NumPad1 || reponse.Key == ConsoleKey.D1)
+                {
+                    MgrService.getInstance().Serviceslist.Sort();
+                }
+
+            }
+            else
+            {
+                AfficherErreur("Choix non valide");
+            }
+            Console.ReadKey();
         }
 
         private ConsoleKeyInfo ModifierService()
@@ -63,7 +91,6 @@ namespace GestionEmployes.IHMConsole
             {
                 Console.Clear();
                 int index = (int)(char.GetNumericValue(tempms.KeyChar)) - 1;
-                //Console.WriteLine("service selectionné: " + liste[index]);
 
                 AfficherInfo("Service courant: " + liste[index] + System.Environment.NewLine);
 
@@ -76,7 +103,6 @@ namespace GestionEmployes.IHMConsole
             {
                 AfficherErreur("Numero de ligne invalide - Appuyer sur un touche pour continuer...");
             }
-
             return tempms;
         }
 
@@ -106,7 +132,6 @@ namespace GestionEmployes.IHMConsole
                         saisieOK = false;
                     }
                 }
-
             } while (!saisieOK);
 
             return nouveauLibelle;
@@ -138,7 +163,6 @@ namespace GestionEmployes.IHMConsole
                         saisieOK = false;
                     }
                 }
-
             } while (!saisieOK);
 
             return nouveauCode;
@@ -283,7 +307,7 @@ namespace GestionEmployes.IHMConsole
         {
             MgrService mgr = MgrService.getInstance();
             List<Service> liste = mgr.Serviceslist;
-            liste.Sort();
+
             if (liste.Count == 0)
             {
                 Console.WriteLine(">>> Liste vide <<<");
@@ -297,30 +321,5 @@ namespace GestionEmployes.IHMConsole
             }
         }
 
-        public static ConsoleKeyInfo ssm()
-        {
-            ConsoleKeyInfo tempssm = new ConsoleKeyInfo();
-            string message = "";
-            do
-            {
-                Console.Clear();
-                Console.WriteLine("--- Sous-Sous-Menu  ---");
-                Console.WriteLine(message);
-                Console.WriteLine();
-                Console.WriteLine("x. une option");
-                Console.WriteLine();
-                Console.WriteLine("R. Retour au sous menu précédent");
-                Console.WriteLine("P. Menu principal");
-                Console.WriteLine("Esc. Quitter");
-                tempssm = Console.ReadKey(true);
-                switch (tempssm.KeyChar)
-                {
-                    case 'x':
-                        message = "J'ai fait un truc";
-                        break;
-                }
-            } while (!(tempssm.Key == ConsoleKey.Escape || tempssm.Key == ConsoleKey.P || tempssm.Key == ConsoleKey.R));
-            return tempssm;
-        }
     }
 }
