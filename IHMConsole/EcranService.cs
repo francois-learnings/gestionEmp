@@ -80,6 +80,7 @@ namespace GestionEmployes.IHMConsole
             Console.ReadKey();
         }
 
+        //TODO: Factoriser methodes de verification via un délégué
         /// <summary>
         /// Permet de modifier le code et/ou le libelle d'un service
         /// </summary>
@@ -276,18 +277,48 @@ namespace GestionEmployes.IHMConsole
         */
         #endregion
 
+        #region delegue attempt
+        private delegate void Verifieur(string var);
+
+        //TODO: Permettre l'abandon en cours d'ajout (retour au menu precedent)
+        private string verifier(string message, Verifieur v)
+        {
+            bool saisieOK;
+            string itemAVerifier;
+            do
+            {
+                saisieOK = true;
+                Console.WriteLine(message);
+                itemAVerifier = Console.ReadLine();
+                try
+                {
+                    v(itemAVerifier);
+
+                }
+                catch (ApplicationException e)
+                {
+                    AfficherErreur(e.Message);
+                    saisieOK = false;
+                }
+            } while (!(itemAVerifier == "A" || saisieOK));
+
+            return itemAVerifier;
+        }
+        #endregion
+
         /// <summary>
         /// Metode permettant d'ajouter un service à la liste
         /// </summary>
-        //TODO: Factoriser methodes de verification via un délégué
         private void AjouterService()
         {
             Console.Clear();
-            string codeAVerifier;
-            string libelleAVerifier;
-            bool saisieOK;
+            string codeOK;
+            string libelleOK;
+            //bool saisieOK;
             Console.WriteLine("--- Ajout d'un nouveau service ---" + System.Environment.NewLine);
-            
+
+            #region Old_Code avant refacto
+            /*
             do
             {
                 saisieOK = true;
@@ -304,9 +335,13 @@ namespace GestionEmployes.IHMConsole
                     saisieOK = false;
                 }
             } while (!(codeAVerifier == "A" || saisieOK));
-            
+            */
+            #endregion
+            codeOK = verifier("Entrez le code du nouveau service (5 caratères):", MgrService.getInstance().VerifierCode);
             //this.saisie("veuillez saisir le code", MgrService.getInstance().VerifierCode);
-            
+
+            #region Old_Code avant refact
+            /*
             do
             {
                 saisieOK = true;
@@ -322,10 +357,12 @@ namespace GestionEmployes.IHMConsole
                     saisieOK = false;
                 }
             } while (!(saisieOK));
-            
+            */
+            #endregion
+            libelleOK = verifier("Entrez le libellé du nouveau service :", MgrService.getInstance().VerifierLibelle);
             //this.saisie("veuillez saisir le code", MgrService.getInstance().VerifierLibelle);
 
-            MgrService.getInstance().AjouterService(codeAVerifier, libelleAVerifier);
+            MgrService.getInstance().AjouterService(codeOK, libelleOK);
             Console.WriteLine("Le nouveau service a été ajouté");
             Console.WriteLine("Voulez-vous ajouter un nouveau service (O/N)?");
             if (Console.ReadKey(true).Key == ConsoleKey.O)
