@@ -187,7 +187,7 @@ namespace GestionEmployes.BLL
         /// </summary>
         /// <param name="codeAVerifier"></param>
         /// <exception cref="ApplicationException"></exception>
-        public void VerfifierCode(string codeAVerifier)
+        public void VerifierCode(string codeAVerifier)
         {
             Service.verifCode(codeAVerifier);
             if (this.ObtenirService(codeAVerifier) != null)

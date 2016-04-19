@@ -56,13 +56,92 @@ namespace GestionEmployes.IHMConsole
             Console.WriteLine();
             Console.WriteLine("Entrez le numero de la ligne à modifier: ");
             List<Service> liste = MgrService.getInstance().Serviceslist;
-            tempms = Console.ReadKey();
+            tempms = Console.ReadKey(true);
             liste.Sort();
-            int index = (int)(char.GetNumericValue(tempms.KeyChar)) - 1;
-            Console.WriteLine("service selectionné: " + liste[index]);
-            Console.ReadKey();
+
+            if (char.GetNumericValue(tempms.KeyChar) > 0 && char.GetNumericValue(tempms.KeyChar) <= MgrService.getInstance().Serviceslist.Count)
+            {
+                Console.Clear();
+                int index = (int)(char.GetNumericValue(tempms.KeyChar)) - 1;
+                //Console.WriteLine("service selectionné: " + liste[index]);
+
+                AfficherInfo("Service courant: " + liste[index] + System.Environment.NewLine);
+
+                string nouveauCode = ModifierCode(liste[index]);
+                string nouveauLibelle = ModifierLibelle(liste[index]);
+
+                MgrService.getInstance().ModifierService(liste[index], nouveauLibelle, nouveauCode);
+            }
+            else
+            {
+                AfficherErreur("Numero de ligne invalide - Appuyer sur un touche pour continuer...");
+            }
 
             return tempms;
+        }
+
+        private string ModifierLibelle(Service s)
+        {
+            string nouveauLibelle;
+            bool saisieOK;
+            do
+            {
+                saisieOK = true;
+                Console.WriteLine("Entrez le nouveau libelle (\"I\" pour ignorer la modification de cette valeur):");
+                nouveauLibelle = Console.ReadLine();
+                if (nouveauLibelle == "I")
+                {
+                    nouveauLibelle = s.Libelle;
+                    saisieOK = true;
+                }
+                else
+                {
+                    try
+                    {
+                        MgrService.getInstance().VerifierLibelle(nouveauLibelle);
+                    }
+                    catch (ApplicationException e)
+                    {
+                        AfficherErreur(e.Message);
+                        saisieOK = false;
+                    }
+                }
+
+            } while (!saisieOK);
+
+            return nouveauLibelle;
+        }
+
+        private string ModifierCode(Service s)
+        {
+            bool saisieOK;
+            string nouveauCode;
+            do
+            {
+                saisieOK = true;
+                Console.WriteLine("Entrez le nouveau code (\"I\" pour ignorer la modification de cette valeur):");
+                nouveauCode = Console.ReadLine();
+                if (nouveauCode == "I")
+                {
+                    nouveauCode = s.Code;
+                    saisieOK = true;
+                }
+                else
+                {
+                    try
+                    {
+                        MgrService.getInstance().VerifierCode(nouveauCode);
+                    }
+                    catch (ApplicationException e)
+                    {
+                        AfficherErreur(e.Message);
+                        saisieOK = false;
+                    }
+                }
+
+            } while (!saisieOK);
+
+            return nouveauCode;
         }
 
         private ConsoleKeyInfo ViderServices()
@@ -152,7 +231,7 @@ namespace GestionEmployes.IHMConsole
                 codeAVerifier = Console.ReadLine();
                 try
                 {
-                    MgrService.getInstance().VerfifierCode(codeAVerifier);
+                    MgrService.getInstance().VerifierCode(codeAVerifier);
 
                 }
                 catch (ApplicationException e)
@@ -189,6 +268,13 @@ namespace GestionEmployes.IHMConsole
         private void AfficherErreur(string message)
         {
             Console.ForegroundColor = this.couleurErreur;
+            Console.WriteLine(message);
+            Console.ForegroundColor = this.couleurNormale;
+        }
+
+        private void AfficherInfo(string message)
+        {
+            Console.ForegroundColor = this.couleurInfo;
             Console.WriteLine(message);
             Console.ForegroundColor = this.couleurNormale;
         }
