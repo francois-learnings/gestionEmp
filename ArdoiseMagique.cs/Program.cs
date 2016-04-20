@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TestIHMWindows
+namespace ArdoiseMagique.cs
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace TestIHMWindows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MaFenetre());
+            Application.Run(new Form1());
         }
     }
 }

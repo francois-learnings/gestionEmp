@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TestIHMWindows
 {
-    public partial class Form1 : Form
+    public partial class MaFenetre : Form
     {
-        public Form1()
+        public MaFenetre()
         {
             InitializeComponent();
         }
@@ -36,6 +36,24 @@ namespace TestIHMWindows
                 MessageBox.Show("ok on arrète !");
                 this.lblReponseALaQuestion.Text = "Non";
             }
+        }
+
+        private void MaFenetre_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Voulez-vous vraiment fermer le formulaire ?",
+                            "Question",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+            if (dr==DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            //la grosse blague:
+            //e.Cancel = true;
         }
     }
 }
