@@ -12,6 +12,11 @@ namespace ArdoiseMagique.cs
 {
     public partial class Form1 : Form
     {
+        bool isDrawing = false;
+        Point start = new Point();
+        int penSize = 2;
+
+        //TODO
         public Form1()
         {
             InitializeComponent();
@@ -24,61 +29,72 @@ namespace ArdoiseMagique.cs
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        ///Gestion evenements frappes clavier 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("code: " +e.KeyCode);
-            Console.WriteLine("value: " +e.KeyValue);
-
             if (e.Alt && e.KeyCode == Keys.P)
             {
-                MessageBox.Show("Plus epais !!!!!!");
+                //MessageBox.Show("Plus epais !!!!!!");
+                penSize += 2;
             }
             if (e.Alt && e.KeyCode == Keys.M)
             {
-                MessageBox.Show("Moins epais !!!!!!");
-                
+                //MessageBox.Show("Moins epais !!!!!!");
+                penSize -= 2;
             }
         }
 
+        #region draw w/ mouse
+
+        /// <summary>
+        /// Deal w/ the movement of the mouse and trigger the drawing and the change of start_coordinate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            /*
+            if (isDrawing)
+            {
+                DrawLine(start, e.Location);
+                start = e.Location;
+            }
+        }
+
+        /// <summary>
+        /// Actually draw the line
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public void DrawLine(Point start, Point end)
+        {
             Graphics g;
             Pen crayon;
-            if (e.Button == MouseButtons.Left)
-            {
-                g = Graphics.FromHwnd(this.Handle);
-                crayon = new Pen(Color.Black);
+            g = Graphics.FromHwnd(this.Handle);
+            crayon = new Pen(Color.Black, penSize);
 
-                g.DrawEllipse(crayon, e.X, e.Y, 1, 1);
-            }
-            */
-
-            bool enCours=false;
-            Point start=new Point();
-            Point end = new Point();
-
-            if (e.Button == MouseButtons.Left)
-            {
-                enCours = true;
-                start.X=e.X;
-                start.Y = e.Y; 
-            }
-            if (e.Button == MouseButtons.Left)
-            {
-                end.X=e.X;
-                end.Y = e.Y;
-            }
-            if (enCours)
-            {
-                Graphics g;
-                Pen crayon;
-                g = Graphics.FromHwnd(this.Handle);
-                crayon = new Pen(Color.Black);
-
-                g.DrawLine(crayon, start, end);
-            }
-
+            g.DrawLine(crayon, start, end);
         }
+
+        /// <summary>
+        /// set the start point coordinates from the line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            isDrawing = true;
+            start.X = e.X;
+            start.Y = e.Y; 
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDrawing = false;
+        }
+        #endregion
     }
 }
