@@ -4,6 +4,7 @@ using GestionEmployes.BO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,9 +74,115 @@ namespace Test
             //testCreationEtUsageDelegue();
             //TODO: Test TrierService(critereService) - voir version cours
             //TrierService();
+
+
+            //testEvenement();
+            //evenement custom
+            testEvenementAnimal();
+
             Console.ReadKey();
         }
 
+        private static void testEvenementAnimal()
+        {
+            Test.Evenements.Animal animal = new Test.Evenements.Animal() { Nom = "Toutou", Race = "Teckel" };
+            animal.leve += Animal_leve;
+            animal.debout();
+
+            animal.ordreDonne += Animal_ordreDonne;
+            animal.donnerUnOrdre("Assis");
+        }
+        private static void Animal_leve(object sender, EventArgs e)
+        {
+            Console.WriteLine("Super, l'animal s'est levé quand je lui ai demandé");
+        }
+
+        private static void Animal_ordreDonne(object sender, Evenements.OrdreDonneEventArgs e)
+        {
+            Console.WriteLine("Super, l'animal a reagis quand je lui ais donné l'ordre: " + e.OrdreDonne);
+        }
+
+
+        private static void testEvenement()
+        {
+
+            BindingList<Voiture> listeVoitures = new BindingList<Voiture>();
+            //on considèere que l'ajout est un evenement important
+            //on veut que la methode uneNouvelleVoiture est arrivée soit appelé lors de l'ajout
+            listeVoitures.Add(new Voiture() { Marque = "RENAULT", Modele = "Clio", Kilometrage = 200000 });
+            listeVoitures.Add(new Voiture() { Marque = "AUDI", Modele = "A6", Kilometrage = 20000 });
+            listeVoitures.Add(new Voiture() { Marque = "CITROEN", Modele = "Picasso", Kilometrage = 150000 });
+
+            //Il faut s'abonner à l'evenement
+            //listeVoitures.AddingNew += ListeVoitures_AddingNew;
+            listeVoitures.ListChanged += uneNouvelleVoitureEstArrivee;
+            listeVoitures.ListChanged += uneNouvelleVoitureEstArrivee2;
+            listeVoitures.ListChanged += uneNouvelleVoitureEstArrivee3;
+            //désabonnements
+            listeVoitures.ListChanged -= uneNouvelleVoitureEstArrivee2;
+            listeVoitures.ListChanged -= uneNouvelleVoitureEstArrivee3;
+
+
+            listeVoitures.Add(new Voiture() { Marque = "PORSCHE", Modele = "Carrera", Kilometrage = 5000 });
+            listeVoitures.Add(new Voiture() { Marque = "PORSCHE", Modele = "Carrera", Kilometrage = 5000 });
+            listeVoitures.Remove(listeVoitures[0]);
+
+            Voiture porsche = new Voiture() { Marque = "PORSCHE", Modele = "Carrera", Kilometrage = 5000 };
+            listeVoitures.Add(porsche);
+            //tentative de  modif => pas d'evenement levé
+            porsche.Modele = "911";
+
+            // toujours pas d'evenement
+            porsche.PropertyChanged += Porsche_PropertyChanged;
+            //tentative de  modif
+            porsche.Modele = "911";
+
+
+
+
+
+        }
+
+        private static void Porsche_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Console.WriteLine("Une propriété de la porsche a été levée");
+        }
+
+        /*
+        private static void ListeVoitures_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        */
+
+
+        public static void uneNouvelleVoitureEstArrivee(object sender, ListChangedEventArgs e)
+        {
+            Console.WriteLine("La liste a changée");
+
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.ItemAdded:
+                    Console.WriteLine("Ajout");
+                    break;
+                case ListChangedType.ItemDeleted:
+                    Console.WriteLine("Suppression");
+                    break;
+                case ListChangedType.ItemChanged:
+                    Console.WriteLine("Changement");
+                    break;
+            }
+        }
+        public static void uneNouvelleVoitureEstArrivee2(object sender, ListChangedEventArgs e)
+        {
+            Console.WriteLine("La liste a changée 2");
+            
+        }
+        public static void uneNouvelleVoitureEstArrivee3(object sender, ListChangedEventArgs e)
+        {
+            Console.WriteLine("La liste a changée 3");
+            
+        }
 
 
         #region TP3

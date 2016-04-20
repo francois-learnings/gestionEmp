@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Evenements\Animal.cs" />
+    <Compile Include="Evenements\OrdreDonneEventArgs.cs" />
     <Compile Include="Generiques\Barbecue.cs" />
     <Compile Include="Generiques\boeuf.cs" />
     <Compile Include="Generiques\jambon.cs" />
