@@ -44,8 +44,9 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(135, 258);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Fonctions:\r\n\r\nAlt + P (plus epais)\r\nAlt + M (moins epais)\r\nblabla\r\nblabla\r\n\r\nPour" +
-    " dessiner, cliquer sur la souris";
+            this.textBox1.Text = "Pour dessiner, cliquer sur la souris\r\n----------\r\nTaille du Trait:\r\nAlt + P (plus" +
+    " epais)\r\nAlt + M (moins epais)\r\n\r\nCouleur du trait:\r\nctrl+shift+F1 (rouge)\r\nctrl" +
+    "+shift+F2 (vert)\r\nctrl+shift+F3 (bleu)";
             // 
             // tableLayoutPanel1
             // 
@@ -69,8 +70,10 @@
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(226, 20);
             this.textBox2.TabIndex = 0;
+            this.textBox2.MouseHover += new System.EventHandler(this.textBox_X_MouseHover);
             // 
             // textBox3
             // 
@@ -79,6 +82,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(226, 20);
             this.textBox3.TabIndex = 1;
+            this.textBox3.MouseHover += new System.EventHandler(this.textBox_X_MouseHover);
             // 
             // textBox4
             // 
@@ -87,6 +91,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(226, 20);
             this.textBox4.TabIndex = 2;
+            this.textBox4.MouseHover += new System.EventHandler(this.textBox_X_MouseHover);
             // 
             // Form1
             // 
@@ -98,6 +103,7 @@
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Evt_Souris";
+            this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);

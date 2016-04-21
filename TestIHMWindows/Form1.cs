@@ -15,6 +15,7 @@ namespace TestIHMWindows
         public MaFenetre()
         {
             InitializeComponent();
+
         }
 
         private void btValider_Click(object sender, EventArgs e)

@@ -16,7 +16,8 @@ namespace TestIHMWindows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MaFenetre());
+            //Application.Run(new MaFenetre());
+            Application.Run(new FormulaireClient());
         }
     }
 }
