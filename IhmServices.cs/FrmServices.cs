@@ -112,6 +112,8 @@ namespace IhmServices.cs
                 case ModesEcran.Consultation:
                     break;
                 case ModesEcran.Ajout:
+                    this.errorProvider.SetError(tbCode, string.Empty);
+                    this.errorProvider.SetError(tbLibelle, string.Empty);
                     if (MgrService.getInstance().Serviceslist.Count == 0)
                     {
                         this.ModeEnCours = ModesEcran.Vide;
@@ -119,6 +121,7 @@ namespace IhmServices.cs
                     else
                     {
                         this.ModeEnCours = ModesEcran.Consultation;
+                        ReloadListe();
                     }
                     break;
                 case ModesEcran.Modification:
@@ -142,8 +145,7 @@ namespace IhmServices.cs
                 case ModesEcran.Consultation:
                     //Delete the service here
                     MgrService.getInstance().SupprimerService((Service)this.lbService.SelectedItem);
-                    this.tbCode.Text = string.Empty;
-                    this.tbLibelle.Text = string.Empty;
+                    this.ClearTB();
                     this.ReloadListe();
                     if (MgrService.getInstance().Serviceslist.Count == 0)
                     {
@@ -174,10 +176,45 @@ namespace IhmServices.cs
 
             }        }
 
+
+        private void btValider_Click(object sender, EventArgs e)
+        {
+                this.errorProvider.SetError(tbCode, string.Empty);
+                this.errorProvider.SetError(tbLibelle, string.Empty);
+            try
+            {
+                MgrService.getInstance().AjouterService(tbCode.Text, tbLibelle.Text);
+                ClearTB();
+                ReloadListe();
+
+            }
+            catch (ApplicationException ae)
+            {
+                if (ae.TargetSite.Name == "verifCode")
+                {
+                    this.errorProvider.SetError(tbCode, ae.Message);
+
+                }
+                if (ae.TargetSite.Name == "verifLibelle")
+                {
+                    this.errorProvider.SetError(tbLibelle, ae.Message);
+                }
+
+            }
+        }
+
+        #region utilitaires
         private void ReloadListe()
         {
             this.lbService.DataSource = null;
             this.lbService.DataSource = MgrService.getInstance().Serviceslist;
         }
+
+        private void ClearTB()
+        {
+            this.tbCode.Text = string.Empty;
+            this.tbLibelle.Text = string.Empty;
+        }
+        #endregion
     }
 }

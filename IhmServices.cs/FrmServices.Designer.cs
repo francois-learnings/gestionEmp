@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbService = new System.Windows.Forms.ListBox();
             this.tbCode = new System.Windows.Forms.TextBox();
             this.lblCodeService = new System.Windows.Forms.Label();
@@ -41,7 +42,9 @@
             this.btAnnuler = new System.Windows.Forms.Button();
             this.btValider = new System.Windows.Forms.Button();
             this.btSupprimer = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lbService
@@ -181,6 +184,7 @@
             this.btValider.Size = new System.Drawing.Size(50, 49);
             this.btValider.TabIndex = 9;
             this.btValider.UseVisualStyleBackColor = true;
+            this.btValider.Click += new System.EventHandler(this.btValider_Click);
             // 
             // btSupprimer
             // 
@@ -192,6 +196,11 @@
             this.btSupprimer.TabIndex = 8;
             this.btSupprimer.UseVisualStyleBackColor = true;
             this.btSupprimer.Click += new System.EventHandler(this.btSupprimer_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
             // 
             // FrmServices
             // 
@@ -208,6 +217,7 @@
             this.Text = "Services";
             this.Load += new System.EventHandler(this.IhmServices_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,6 +238,7 @@
         private System.Windows.Forms.Button btAnnuler;
         private System.Windows.Forms.Button btValider;
         private System.Windows.Forms.Button btSupprimer;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
 
