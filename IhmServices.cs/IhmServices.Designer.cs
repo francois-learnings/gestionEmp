@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbListeService = new System.Windows.Forms.ListBox();
-            this.tbCodeService = new System.Windows.Forms.TextBox();
+            this.lbService = new System.Windows.Forms.ListBox();
+            this.tbCode = new System.Windows.Forms.TextBox();
             this.lblCodeService = new System.Windows.Forms.Label();
-            this.tbLibelleService = new System.Windows.Forms.TextBox();
+            this.tbLibelle = new System.Windows.Forms.TextBox();
             this.lblLibelleService = new System.Windows.Forms.Label();
             this.btImporter = new System.Windows.Forms.Button();
             this.btExporter = new System.Windows.Forms.Button();
@@ -44,24 +44,24 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lbListeService
+            // lbService
             // 
-            this.lbListeService.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lbService.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbListeService.FormattingEnabled = true;
-            this.lbListeService.Location = new System.Drawing.Point(12, 12);
-            this.lbListeService.Name = "lbListeService";
-            this.lbListeService.Size = new System.Drawing.Size(551, 212);
-            this.lbListeService.TabIndex = 0;
+            this.lbService.FormattingEnabled = true;
+            this.lbService.Location = new System.Drawing.Point(12, 12);
+            this.lbService.Name = "lbService";
+            this.lbService.Size = new System.Drawing.Size(551, 212);
+            this.lbService.TabIndex = 0;
             // 
-            // tbCodeService
+            // tbCode
             // 
-            this.tbCodeService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbCodeService.Location = new System.Drawing.Point(69, 285);
-            this.tbCodeService.Name = "tbCodeService";
-            this.tbCodeService.Size = new System.Drawing.Size(100, 20);
-            this.tbCodeService.TabIndex = 1;
+            this.tbCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbCode.Location = new System.Drawing.Point(69, 285);
+            this.tbCode.Name = "tbCode";
+            this.tbCode.Size = new System.Drawing.Size(100, 20);
+            this.tbCode.TabIndex = 1;
             // 
             // lblCodeService
             // 
@@ -73,14 +73,14 @@
             this.lblCodeService.TabIndex = 2;
             this.lblCodeService.Text = "Code :";
             // 
-            // tbLibelleService
+            // tbLibelle
             // 
-            this.tbLibelleService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbLibelle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLibelleService.Location = new System.Drawing.Point(298, 285);
-            this.tbLibelleService.Name = "tbLibelleService";
-            this.tbLibelleService.Size = new System.Drawing.Size(258, 20);
-            this.tbLibelleService.TabIndex = 3;
+            this.tbLibelle.Location = new System.Drawing.Point(298, 285);
+            this.tbLibelle.Name = "tbLibelle";
+            this.tbLibelle.Size = new System.Drawing.Size(258, 20);
+            this.tbLibelle.TabIndex = 3;
             // 
             // lblLibelleService
             // 
@@ -196,10 +196,10 @@
             this.ClientSize = new System.Drawing.Size(575, 394);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lblLibelleService);
-            this.Controls.Add(this.tbLibelleService);
+            this.Controls.Add(this.tbLibelle);
             this.Controls.Add(this.lblCodeService);
-            this.Controls.Add(this.tbCodeService);
-            this.Controls.Add(this.lbListeService);
+            this.Controls.Add(this.tbCode);
+            this.Controls.Add(this.lbService);
             this.Name = "IhmServices";
             this.Text = "Services";
             this.Load += new System.EventHandler(this.IhmServices_Load);
@@ -211,10 +211,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbListeService;
-        private System.Windows.Forms.TextBox tbCodeService;
+        private System.Windows.Forms.ListBox lbService;
+        private System.Windows.Forms.TextBox tbCode;
         private System.Windows.Forms.Label lblCodeService;
-        private System.Windows.Forms.TextBox tbLibelleService;
+        private System.Windows.Forms.TextBox tbLibelle;
         private System.Windows.Forms.Label lblLibelleService;
         private System.Windows.Forms.Button btImporter;
         private System.Windows.Forms.Button btExporter;
