@@ -16,7 +16,7 @@ namespace IhmServices.cs
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new IhmServices());
+            Application.Run(new FrmServices());
         }
     }
 }

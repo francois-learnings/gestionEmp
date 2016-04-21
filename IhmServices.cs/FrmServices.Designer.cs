@@ -1,6 +1,6 @@
 ﻿namespace IhmServices.cs
 {
-    partial class IhmServices
+    partial class FrmServices
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -54,6 +54,7 @@
             this.lbService.Name = "lbService";
             this.lbService.Size = new System.Drawing.Size(551, 212);
             this.lbService.TabIndex = 0;
+            this.lbService.SelectedIndexChanged += new System.EventHandler(this.lbService_SelectedIndexChanged);
             // 
             // tbCode
             // 
@@ -158,6 +159,7 @@
             this.btQuitter.Size = new System.Drawing.Size(50, 49);
             this.btQuitter.TabIndex = 11;
             this.btQuitter.UseVisualStyleBackColor = true;
+            this.btQuitter.Click += new System.EventHandler(this.btQuitter_Click);
             // 
             // btAnnuler
             // 
@@ -168,6 +170,7 @@
             this.btAnnuler.Size = new System.Drawing.Size(50, 49);
             this.btAnnuler.TabIndex = 10;
             this.btAnnuler.UseVisualStyleBackColor = true;
+            this.btAnnuler.Click += new System.EventHandler(this.btAnnuler_Click);
             // 
             // btValider
             // 
@@ -188,8 +191,9 @@
             this.btSupprimer.Size = new System.Drawing.Size(50, 49);
             this.btSupprimer.TabIndex = 8;
             this.btSupprimer.UseVisualStyleBackColor = true;
+            this.btSupprimer.Click += new System.EventHandler(this.btSupprimer_Click);
             // 
-            // IhmServices
+            // FrmServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -200,7 +204,7 @@
             this.Controls.Add(this.lblCodeService);
             this.Controls.Add(this.tbCode);
             this.Controls.Add(this.lbService);
-            this.Name = "IhmServices";
+            this.Name = "FrmServices";
             this.Text = "Services";
             this.Load += new System.EventHandler(this.IhmServices_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
