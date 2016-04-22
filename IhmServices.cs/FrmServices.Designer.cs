@@ -43,6 +43,7 @@
             this.btValider = new System.Windows.Forms.Button();
             this.btSupprimer = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +58,7 @@
             this.lbService.Name = "lbService";
             this.lbService.Size = new System.Drawing.Size(551, 212);
             this.lbService.TabIndex = 0;
-            this.lbService.SelectedIndexChanged += new System.EventHandler(this.lbService_SelectedIndexChanged);
+            this.lbService.SelectedValueChanged += new System.EventHandler(this.lbService_SelectedValueChanged);
             // 
             // tbCode
             // 
@@ -66,6 +67,7 @@
             this.tbCode.Name = "tbCode";
             this.tbCode.Size = new System.Drawing.Size(100, 20);
             this.tbCode.TabIndex = 1;
+            this.tbCode.Validating += new System.ComponentModel.CancelEventHandler(this.tbCode_Validating);
             // 
             // lblCodeService
             // 
@@ -85,6 +87,8 @@
             this.tbLibelle.Name = "tbLibelle";
             this.tbLibelle.Size = new System.Drawing.Size(258, 20);
             this.tbLibelle.TabIndex = 3;
+            this.tbLibelle.ModifiedChanged += new System.EventHandler(this.tbLibelle_ModifiedChanged);
+            this.tbLibelle.Validating += new System.ComponentModel.CancelEventHandler(this.tbLibelle_Validating);
             // 
             // lblLibelleService
             // 
@@ -104,6 +108,7 @@
             this.btImporter.Name = "btImporter";
             this.btImporter.Size = new System.Drawing.Size(50, 49);
             this.btImporter.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.btImporter, "Importer");
             this.btImporter.UseVisualStyleBackColor = true;
             // 
             // btExporter
@@ -114,7 +119,9 @@
             this.btExporter.Name = "btExporter";
             this.btExporter.Size = new System.Drawing.Size(50, 49);
             this.btExporter.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.btExporter, "Exporter");
             this.btExporter.UseVisualStyleBackColor = true;
+            this.btExporter.Click += new System.EventHandler(this.btExporter_Click);
             // 
             // btAjouter
             // 
@@ -124,6 +131,7 @@
             this.btAjouter.Name = "btAjouter";
             this.btAjouter.Size = new System.Drawing.Size(50, 49);
             this.btAjouter.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.btAjouter, "Ajouter un service");
             this.btAjouter.UseVisualStyleBackColor = true;
             this.btAjouter.Click += new System.EventHandler(this.btAjouter_Click);
             // 
@@ -161,6 +169,7 @@
             this.btQuitter.Name = "btQuitter";
             this.btQuitter.Size = new System.Drawing.Size(50, 49);
             this.btQuitter.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.btQuitter, "Quitter");
             this.btQuitter.UseVisualStyleBackColor = true;
             this.btQuitter.Click += new System.EventHandler(this.btQuitter_Click);
             // 
@@ -172,6 +181,7 @@
             this.btAnnuler.Name = "btAnnuler";
             this.btAnnuler.Size = new System.Drawing.Size(50, 49);
             this.btAnnuler.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.btAnnuler, "Annuler");
             this.btAnnuler.UseVisualStyleBackColor = true;
             this.btAnnuler.Click += new System.EventHandler(this.btAnnuler_Click);
             // 
@@ -183,6 +193,7 @@
             this.btValider.Name = "btValider";
             this.btValider.Size = new System.Drawing.Size(50, 49);
             this.btValider.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.btValider, "Valider");
             this.btValider.UseVisualStyleBackColor = true;
             this.btValider.Click += new System.EventHandler(this.btValider_Click);
             // 
@@ -194,6 +205,7 @@
             this.btSupprimer.Name = "btSupprimer";
             this.btSupprimer.Size = new System.Drawing.Size(50, 49);
             this.btSupprimer.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.btSupprimer, "Supprimer un service");
             this.btSupprimer.UseVisualStyleBackColor = true;
             this.btSupprimer.Click += new System.EventHandler(this.btSupprimer_Click);
             // 
@@ -239,6 +251,7 @@
         private System.Windows.Forms.Button btValider;
         private System.Windows.Forms.Button btSupprimer;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
